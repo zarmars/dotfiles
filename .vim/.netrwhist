@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/gongxing/cs287_project/cs287hw1/cs287-hw1-code/part2'
+let g:netrw_dirhist_2='/home/gongxing/dev/nodocker_apollo/apollo/modules/planning'
+let g:netrw_dirhist_3='/home/gongxing/dev/nodocker_apollo/apollo/modules/planning/common/util'
+let g:netrw_dirhist_4='/home/gongxing/dev/nodocker_apollo/apollo/modules/planning/conf'
+let g:netrw_dirhist_5='/home/gongxing/dev/nodocker_apollo/apollo/modules/common/data'
