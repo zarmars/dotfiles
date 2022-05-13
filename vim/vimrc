@@ -1,0 +1,180 @@
+syntax on
+syntax enable
+filetype on
+
+set nocompatible
+let mapleader=" "
+
+map s <nop>
+map S :w<CR>
+map Q :q<CR>
+map R :source ~/.vim/vimrc<CR>
+
+set number
+set norelativenumber
+set cursorline
+"highlight CursorLine cterm=None ctermbg=darkblue ctermfg=grey"
+set wrap
+set showcmd
+set wildmenu
+set tabstop=2
+set expandtab
+set hlsearch
+exec "nohlsearch"
+set incsearch
+
+set textwidth=80
+set colorcolumn=81
+set foldmethod=manual
+set helplang=cn
+set cin
+set sw=2
+set sta
+set backspace=2
+set history=1000
+set autoindent
+set smartindent
+set shiftwidth=4
+set showmatch
+set ruler
+set list
+set listchars=tab:>-,trail:-
+set tags=./.tags;,.tags
+
+map H 5h
+map J 5j
+map K 5k
+map L 5l
+
+map <LEADER>l <C-w>l
+map <LEADER>h <C-w>h
+map <LEADER>j <C-w>j
+map <LEADER>k <C-w>k
+
+" Disable the default s key
+noremap s <nop>
+
+" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
+
+" Resize splits with arrow keys
+noremap <up> :res +5<CR>
+noremap <down> :res -5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
+
+" ===
+" === Tab management
+" ===
+" Create a new tab with tu
+noremap te :tabe<CR>
+noremap tE :tab split<CR>
+" Move around tabs with tn and ti
+noremap th :-tabnext<CR>
+noremap tl :+tabnext<CR>
+" Move the tabs with tmh and tml
+noremap tmh :-tabmove<CR>
+noremap tml :+tabmove<CR>
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'connorholyday/vim-snazzy'
+Plug 'preservim/nerdtree'
+Plug 'davidhalter/jedi-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'xavierd/clang_complete'
+
+call plug#end()
+
+" ===
+" === clang_complete settings
+" ===
+
+let g:clang_complete_copen=1
+let g:clang_use_library=1
+let g:clang_user_options='|| exit 0'
+" path to directory where library can be found
+let g:clang_library_path='/usr/lib/llvm-6.0/lib'
+
+" ===
+" === snazzy settings
+" ===
+
+let g:SnazzyTransparent=1
+colorscheme snazzy
+let g:lightline = {
+\ 'colorscheme': 'snazzy',
+\ }
+
+" ===
+" === NerdTree settings
+" ===
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" ===
+" === jedi-vim settings
+" ===
+
+let g:jedi#documentation_command = "<leader>k"
+let g:jedi#popup_select_first = 0
+let g:jedi#environment_path = "/home/gongxing/Documents/machine_learning/venv/bin/python3"
+
+" ===
+" coc.nvim
+" ===
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
