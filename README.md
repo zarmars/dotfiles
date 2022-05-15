@@ -1,5 +1,5 @@
-### dotfiles
-Repo contain my config file. Currently only the vim config file is included. May add other config files in the future.
+## Description
+This is a repo contain my config file. Currently only the vim config file is included. Some other configuration file may be added in the future.
 ***
 ## How to configure vim
 
