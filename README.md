@@ -1,5 +1,5 @@
 ## Description
-This is a repo contain my config file. Currently only the vim config file is included. Some other configuration file may be added in the future.
+This is a repo contain my config file. Currently only the vim config file is included. Some other configuration files may be added in the future.
 ***
 ## How to configure vim
 
