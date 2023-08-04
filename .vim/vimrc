@@ -13,7 +13,7 @@ map R :source ~/.vim/vimrc<CR>
 set number
 set norelativenumber
 set cursorline
-"highlight CursorLine cterm=None ctermbg=darkblue ctermfg=grey"
+"highlight CursorLine cterm=None ctermbg=darkblue ctermfg=grey
 set wrap
 set showcmd
 set wildmenu
@@ -84,10 +84,30 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'connorholyday/vim-snazzy'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
+Plug 'jdkanani/vim-material-theme'
+Plug 'sainnhe/sonokai'
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
 Plug 'davidhalter/jedi-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'crusoexia/vim-monokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'ajmwagar/vim-deus'
+
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 "Plug 'xavierd/clang_complete'
+Plug 'preservim/tagbar', {'on': 'TagbarOpenAutoClose' }
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'vimwiki/vimwiki'
+Plug 'makerj/vim-pdf'
 
 call plug#end()
 
@@ -102,14 +122,143 @@ let g:clang_user_options='|| exit 0'
 let g:clang_library_path='/usr/lib/llvm-6.0/lib'
 
 " ===
+" === vim airline
+" ===
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+"let g:airline_symbols.colnr = ' ㏇:'
+"let g:airline_symbols.colnr = ' ℅:'
+"let g:airline_symbols.crypt = '🔒'
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.linenr = ' ␊:'
+"let g:airline_symbols.linenr = ' ␤:'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.maxlinenr = ''
+"let g:airline_symbols.maxlinenr = '㏑'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+
+let g:airline#extensions#tabline#show_splits = 1
+"let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#formatter = 'jsformatter'
+
+" ===
 " === snazzy settings
 " ===
 
-let g:SnazzyTransparent=1
-colorscheme snazzy
-let g:lightline = {
-\ 'colorscheme': 'snazzy',
-\ }
+" let g:SnazzyTransparent=1
+" colorscheme snazzy
+" let g:lightline = {
+" \ 'colorscheme': 'snazzy',
+" \ }
+
+" ===
+" === monokai settings
+" ===
+" colorscheme monokai
+" let g:monokai_term_italic = 1
+" let g:monokai_gui_italic = 1
+" let g:monokai_termcolors = 256
+
+" ===
+" === dracula settings
+" ===
+" colorscheme dracula
+" let g:airline_theme = 'dracula'
+" let g:dracula_italic = 1
+
+" ===
+" === dracula settings
+" ===
+colorscheme gruvbox
+set bg=dark
+
+" ===
+" === deus settings
+" ===
+set t_Co=256
+set termguicolors
+
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" set background=dark    " Setting dark mode
+colorscheme deus
+let g:deus_termcolors=256
+set bg=dark
+
+" ===
+" === nord settings
+" ===
+"colorscheme nord
+
+" ===
+" === ayu settings
+" ===
+"set termguicolors     " enable true colors support
+""let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+""let ayucolor="dark"   " for dark version of theme
+"colorscheme ayu
+
+" ===
+" === papercolor settings
+" ===
+"set background=dark
+"let g:PaperColor_Theme_Options = {
+"  \   'theme': {
+"  \     'default.dark': {
+"  \       'transparent_background': 1
+"  \     }
+"  \   }
+"  \ }
+"colorscheme PaperColor
+
+" ===
+" === onedark settings
+" ===
+"let g:lightline = {
+"  \ 'colorscheme': 'onedark',
+"  \ }
+
+"colorscheme onedark
+
+" ===
+" === vim material theme
+" ===
+"set background=dark
+"colorscheme material-theme
+
+" ===
+" === sonokai theme
+" ===
+" Important!!
+" if has('termguicolors')
+  " set termguicolors
+" endif
+
+" The configuration options should be placed before `colorscheme sonokai`.
+" let g:sonokai_style = 'maia'
+"let g:sonokai_style = 'espresso'
+"let g:sonokai_style = 'atlantis'
+" let g:sonokai_style = 'shusia'
+
+" let g:sonokai_transparent_background = 2
+
+" let g:sonokai_cursor = 'orange'
+" let g:sonokai_cursor = 'yellow'
+"let g:sonokai_cursor = 'green'
+"let g:sonokai_cursor = 'blue'
+" let g:sonokai_cursor = 'purple'
+
+" let g:sonokai_better_performance = 1
+" colorscheme sonokai
+
 
 " ===
 " === NerdTree settings
@@ -118,12 +267,42 @@ let g:lightline = {
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+
+" ===
+" === NerdCommenter settings
+" ===
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 " ===
 " === jedi-vim settings
@@ -132,6 +311,115 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:jedi#documentation_command = "<leader>k"
 let g:jedi#popup_select_first = 0
 let g:jedi#environment_path = "/home/gongxing/Documents/machine_learning/venv/bin/python3"
+
+" ==================== FZF ====================
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+noremap <silent> <C-f> :Files<CR>
+noremap <silent> <C-p> :Files /apollo<CR>
+noremap <silent> <C-j> :Jumps<CR>
+" This is the default extra key bindings
+" let g:fzf_action = {
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-x': 'split',
+"   \ 'ctrl-v': 'vsplit' }
+
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-p': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - Popup window (center of the screen)
+" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" 
+" " - Popup window (center of the current window)
+" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+" 
+" " - Popup window (anchored to the bottom of the current window)
+" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
+" 
+" " - down / up / left / right
+" let g:fzf_layout = { 'down': '40%' }
+" 
+" " - Window using a Vim command
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': '10new' }
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
+
+" ===
+" Python-syntax
+" ===
+let g:python_highlight_all = 1
+
+" ===
+" Taglist
+" ===
+map <silent> T :TagbarOpenAutoClose<CR>
+
+" ===
+" === MarkdownPreview
+" ===
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
+let g:mkdp_open_to_the_world = 0
+let g:mkdp_open_ip = ''
+let g:mkdp_browser = 'chromium'
+let g:mkdp_echo_preview_url = 0
+let g:mkdp_browserfunc = ''
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1
+    \ }
+let g:mkdp_markdown_css = ''
+let g:mkdp_highlight_css = ''
+let g:mkdp_port = ''
+let g:mkdp_page_title = '「${name}」'
+
+" ===
+" === vim-table-mode
+" ===
+map <LEADER>tm :TableModeToggle<CR>
 
 " ===
 " coc.nvim
@@ -159,14 +447,27 @@ set shortmess+=c
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>CheckBackSpace() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -177,4 +478,35 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> D :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Mappings for CoCList
+" Show all diagnostics
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item
+nnoremap <silent><nowait> <space>[  :<C-u>CocNext<CR>
+" Do default action for previous item
+nnoremap <silent><nowait> <space>]  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
